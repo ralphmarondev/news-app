@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.news.api.java)
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.coil.compose)
+    implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
