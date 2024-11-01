@@ -1,5 +1,6 @@
 package com.ralphmarondev.newsapp.features.home.presentation
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.newsapp.features.home.presentation.components.ArticleCard
+import com.ralphmarondev.newsapp.features.home.presentation.components.CategoriesBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -70,15 +72,21 @@ fun HomeScreen(
             )
         }
     ) { innerPadding ->
-        LazyColumn(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            items(articles.size) { index ->
-                ArticleCard(
-                    article = articles[index]
-                )
+            CategoriesBar(viewModel)
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                items(articles.size) { index ->
+                    ArticleCard(
+                        article = articles[index]
+                    )
+                }
             }
         }
     }
