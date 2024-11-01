@@ -1,7 +1,9 @@
 package com.ralphmarondev.newsapp.features.home.presentation
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -21,6 +23,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.newsapp.features.home.presentation.components.ArticleCard
 import com.ralphmarondev.newsapp.features.home.presentation.components.CategoriesBar
@@ -28,7 +34,8 @@ import com.ralphmarondev.newsapp.features.home.presentation.components.Categorie
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = viewModel()
+    viewModel: HomeViewModel = viewModel(),
+    navigateToDetailScreen: (String) -> Unit
 ) {
     val articles by viewModel.articles.observeAsState(emptyList())
 
@@ -82,9 +89,25 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
+                item {
+                    AnimatedVisibility(articles.isEmpty()) {
+                        Text(
+                            text = "Failed fetching news.",
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.W500,
+                            color = MaterialTheme.colorScheme.tertiary,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 16.dp, horizontal = 8.dp)
+                        )
+                    }
+                }
                 items(articles.size) { index ->
                     ArticleCard(
-                        article = articles[index]
+                        article = articles[index],
+                        navigateToDetailScreen = navigateToDetailScreen
                     )
                 }
             }

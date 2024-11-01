@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.ralphmarondev.newsapp.features.home.presentation.HomeScreen
+import com.ralphmarondev.newsapp.navigation.AppNavigation
 import com.ralphmarondev.newsapp.ui.theme.NewsAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NewsAppTheme {
-                HomeScreen()
+                AppNavigation()
             }
         }
     }

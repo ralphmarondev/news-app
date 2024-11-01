@@ -22,10 +22,11 @@ import com.ralphmarondev.newsapp.core.utils.Constant
 
 @Composable
 fun ArticleCard(
-    article: Article
+    article: Article,
+    navigateToDetailScreen: (String) -> Unit
 ) {
     ElevatedCard(
-        onClick = {},
+        onClick = { navigateToDetailScreen(article.url) },
         modifier = Modifier
             .padding(8.dp)
     ) {
