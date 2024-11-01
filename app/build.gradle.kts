@@ -63,6 +63,8 @@ dependencies {
     implementation(libs.androidx.material.icons.extended.android)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.news.api.java)
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
