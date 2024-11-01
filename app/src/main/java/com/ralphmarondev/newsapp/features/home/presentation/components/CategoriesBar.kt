@@ -1,6 +1,8 @@
 package com.ralphmarondev.newsapp.features.home.presentation.components
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -8,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
@@ -23,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -59,19 +63,31 @@ fun CategoriesBar(viewModel: HomeViewModel) {
                         .border(1.dp, Color.Gray, CircleShape)
                         .clip(CircleShape),
                     trailingIcon = {
-                        IconButton(
-                            onClick = {
-                                isSearchExpanded = !isSearchExpanded
-                                if (searchQuery.isNotEmpty()) {
-                                    viewModel.fetchEverythingWithQuery(searchQuery)
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            AnimatedVisibility(searchQuery.isNotEmpty()) {
+                                IconButton(onClick = { searchQuery = "" }) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Clear,
+                                        contentDescription = "Clear"
+                                    )
                                 }
                             }
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Search,
-                                contentDescription = "Search"
-                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            IconButton(
+                                onClick = {
+                                    isSearchExpanded = !isSearchExpanded
+                                    if (searchQuery.isNotEmpty()) {
+                                        viewModel.fetchEverythingWithQuery(searchQuery)
+                                    }
+                                }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Search,
+                                    contentDescription = "Search"
+                                )
+                            }
                         }
+
                     },
                     placeholder = {
                         Text(
@@ -80,7 +96,10 @@ fun CategoriesBar(viewModel: HomeViewModel) {
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
-                    }
+                    },
+                    textStyle = TextStyle(
+                        fontFamily = FontFamily.Monospace
+                    )
                 )
             } else {
                 IconButton(onClick = { isSearchExpanded = !isSearchExpanded }) {
