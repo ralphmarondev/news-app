@@ -11,6 +11,8 @@ import com.ralphmarondev.newsapp.features.home.presentation.HomeScreen
 
 @Composable
 fun AppNavigation(
+    isDarkTheme: Boolean,
+    toggleAppTheme: () -> Unit,
     navController: NavHostController = rememberNavController()
 ) {
     NavHost(
@@ -19,6 +21,8 @@ fun AppNavigation(
     ) {
         composable<Routes.Home> {
             HomeScreen(
+                isDarkTheme = isDarkTheme,
+                toggleAppTheme = toggleAppTheme,
                 navigateToDetailScreen = { url ->
                     navController.navigate(Routes.Details(url))
                 }

@@ -6,14 +6,17 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -41,7 +44,8 @@ fun ArticleCard(
                 contentDescription = "Article Image",
                 modifier = Modifier
                     .size(80.dp)
-                    .aspectRatio(1f),
+                    .aspectRatio(1f)
+                    .clip(RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop
             )
 
@@ -53,13 +57,15 @@ fun ArticleCard(
                     text = article.title,
                     fontWeight = FontWeight.Bold,
                     maxLines = 3,
-                    fontFamily = FontFamily.Monospace
+                    fontFamily = FontFamily.Monospace,
+                    overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     text = article.source.name,
                     maxLines = 1,
                     fontSize = 14.sp,
-                    fontFamily = FontFamily.Monospace
+                    fontFamily = FontFamily.Monospace,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }

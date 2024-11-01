@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.LightMode
 import androidx.compose.material.icons.outlined.Menu
@@ -35,7 +36,9 @@ import com.ralphmarondev.newsapp.features.home.presentation.components.Categorie
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = viewModel(),
-    navigateToDetailScreen: (String) -> Unit
+    isDarkTheme: Boolean,
+    navigateToDetailScreen: (String) -> Unit,
+    toggleAppTheme: () -> Unit
 ) {
     val articles by viewModel.articles.observeAsState(emptyList())
 
@@ -63,9 +66,11 @@ fun HomeScreen(
                             contentDescription = "Favorites"
                         )
                     }
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = toggleAppTheme) {
+                        val icon =
+                            if (isDarkTheme) Icons.Outlined.LightMode else Icons.Outlined.DarkMode
                         Icon(
-                            imageVector = Icons.Outlined.LightMode,
+                            imageVector = icon,
                             contentDescription = "App Theme Icon"
                         )
                     }

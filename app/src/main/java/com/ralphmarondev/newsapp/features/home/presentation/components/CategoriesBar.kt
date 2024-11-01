@@ -61,8 +61,8 @@ fun CategoriesBar(viewModel: HomeViewModel) {
                     trailingIcon = {
                         IconButton(
                             onClick = {
+                                isSearchExpanded = !isSearchExpanded
                                 if (searchQuery.isNotEmpty()) {
-                                    isSearchExpanded = !isSearchExpanded
                                     viewModel.fetchEverythingWithQuery(searchQuery)
                                 }
                             }
